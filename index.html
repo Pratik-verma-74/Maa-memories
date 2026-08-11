@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>अन्नपूर्णा देवी — पावन स्मृति</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#FDFBF7">
+</head>
+<body>
+
+    <!-- Audio System -->
+    <div class="audio-panel">
+        <button id="musicToggle" class="floating-btn" title="प्ले / म्यूट">
+            <span id="musicIcon">🔇</span>
+        </button>
+        <div class="audio-options">
+            <button class="audio-btn active" data-src="assets/audio/mantra.m4a">ॐ गायत्री मंत्र</button>
+            <button class="audio-btn" data-src="assets/audio/maa_ki_dua_trimmed.m4a">माँ की दुआ</button>
+        </div>
+    </div>
+    <audio id="bgMusic" loop>
+        <source src="assets/audio/mantra.m4a" type="audio/mp4">
+    </audio>
+
+    <!-- Navigation -->
+    <nav id="mainNav" class="nav-hidden">
+        <button id="navToggle" aria-label="Toggle Menu">☰</button>
+        <ul id="navMenu">
+            <li><a href="#" data-target="homeScreen">🏠 शुरुआत</a></li>
+            <li><a href="#" data-target="selectionScreen">🌸 मुख्य पृष्ठ</a></li>
+            <li><a href="#" data-target="photoMode">📷 फोटो स्मृति</a></li>
+            <li><a href="#" data-target="videoMode">🎥 वीडियो स्मृति</a></li>
+            <li><a href="#" data-target="shlokMode">🕉️ संस्कृत श्लोक</a></li>
+            <li><a href="#" data-target="bookMode">📖 स्मृति-पुस्तक</a></li>
+            <li><a href="#" data-target="personalMessageMode">❤️ मेरी माँ के नाम</a></li>
+        </ul>
+    </nav>
+
+    <!-- 1. Landing Screen -->
+    <section id="homeScreen" class="screen active fade-in">
+        <div class="content-center">
+            <h1 class="om-shanti">ॐ शांति ॐ</h1>
+            
+            <div class="hero-portrait mt-8 mb-4">
+                <img src="assets/photos/Gemini_Generated_Image_jj7tyjjj7tyjjj7t.png" alt="स्वर्गीय श्रीमती अन्नपूर्णा देवी">
+                <div id="diyaContainer" class="diya-container hidden">
+                    <!-- Real CSS Diya or Image will go here -->
+                    <div class="css-diya">
+                        <div class="flame"></div>
+                        <div class="base"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tribute-actions mb-6">
+                <button id="btnPushpanjali" class="tribute-btn real-icon-btn" title="पुष्पांजलि अर्पित करें">
+                    <img src="assets/images/real_flower.png" alt="Flower">
+                </button>
+                <button id="btnDiya" class="tribute-btn real-icon-btn" title="दीप प्रज्वलित करें">
+                    <img src="assets/images/real_diya.png" alt="Diya">
+                </button>
+            </div>
+
+            <h2 class="sub-title">पावन स्मृति</h2>
+            <h1 class="main-title mt-2">स्वर्गीय श्रीमती अन्नपूर्णा देवी</h1>
+            <p class="quote mt-4">मेरी नानी...<br>मेरी माँ।</p>
+            <p class="date mt-4">07 अगस्त 2026</p>
+            <div class="divider mt-6"></div>
+            <p class="poetic-text mt-4">“कुछ रिश्ते नाम से नहीं,<br>दिल में मिले स्थान से पहचाने जाते हैं।”</p>
+            <button id="enterBtn" class="primary-btn mt-8">📖 स्मृति पुस्तक खोलें</button>
+        </div>
+    </section>
+
+    <!-- 2. Selection Screen -->
+    <section id="selectionScreen" class="screen hidden">
+        <div class="container text-center pt-8">
+            <h2 class="section-title">स्मृतियाँ</h2>
+            <p class="section-subtitle">आप उन्हें कैसे याद करना चाहेंगे?</p>
+            
+            <div class="mode-cards mt-8">
+                <div class="mode-card" id="openPhotoBtn">
+                    <div class="mode-icon-gold">🖼️</div>
+                    <h3>फोटो स्मृति</h3>
+                    <p>एक-एक तस्वीर में बसी अनमोल यादें</p>
+                </div>
+                
+                <div class="mode-card" id="openVideoBtn">
+                    <div class="mode-icon-gold">🎬</div>
+                    <h3>वीडियो स्मृति</h3>
+                    <p>चलती-फिरती यादों का संग्रह</p>
+                </div>
+            </div>
+            
+            <!-- Beautiful Mini Shlok Section -->
+            <div class="mini-shlok-card mt-12" id="miniShlokContainer">
+                <div class="om-icon">🕉️</div>
+                <p class="sanskrit-text-large" id="miniShlokSanskrit"></p>
+                <div class="divider mt-4 mb-4"></div>
+                <p class="hindi-meaning" id="miniShlokHindi"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Photo Mode -->
+    <section id="photoMode" class="screen hidden">
+        <div class="photo-viewer-container">
+            <div class="photo-header">
+                <button class="back-btn" data-target="selectionScreen">← वापस</button>
+                <div class="photo-counter" id="photoCounter">1 / 1</div>
+                <button id="fullscreenBtn" aria-label="Fullscreen">⛶</button>
+            </div>
+            
+            <div class="photo-main" id="photoMainArea">
+                <img id="currentPhoto" src="" alt="स्मृति" class="smooth-transition">
+                <div class="photo-controls">
+                    <button id="prevPhotoBtn" class="nav-arrow" aria-label="पिछली तस्वीर">←</button>
+                    <button id="nextPhotoBtn" class="nav-arrow" aria-label="अगली तस्वीर">→</button>
+                </div>
+            </div>
+            
+            <div class="photo-footer">
+                <h3 id="photoTitle" class="photo-title"></h3>
+                <p id="photoCaption" class="photo-caption"></p>
+                <p id="photoDate" class="photo-date"></p>
+                <div class="slideshow-controls mt-2">
+                    <button id="playPauseSlideshow" class="secondary-btn">▶ Slideshow</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Video Mode -->
+    <section id="videoMode" class="screen hidden">
+        <div class="container pt-8 pb-8">
+            <div class="flex-between">
+                <button class="back-btn mb-4" data-target="selectionScreen">← वापस</button>
+                <h2 class="section-title">🎥 वीडियो स्मृति</h2>
+            </div>
+            
+            <div class="video-grid mt-6" id="videoGrid">
+                <!-- Video cards dynamically inserted here -->
+            </div>
+        </div>
+        
+        <!-- Video Lightbox Player -->
+        <div id="videoLightbox" class="lightbox hidden">
+            <div class="lightbox-content">
+                <button id="closeVideoBtn" class="close-btn">✖</button>
+                <video id="mainVideoPlayer" controls playsinline preload="metadata">
+                    <source src="" type="video/mp4">
+                    आपका ब्राउज़र वीडियो सपोर्ट नहीं करता।
+                </video>
+                <h3 id="lightboxVideoTitle" class="mt-4 video-title"></h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Shlok Mode -->
+    <section id="shlokMode" class="screen hidden">
+        <div class="container pt-8">
+            <button class="back-btn mb-4" data-target="selectionScreen">← वापस</button>
+            <h2 class="section-title text-center">🕉️ शान्ति एवं स्मृति</h2>
+            
+            <div class="shlok-carousel mt-8" id="shlokCarousel">
+                <!-- Dynamically populated -->
+                <div class="shlok-card text-center">
+                    <p id="mainShlokSanskrit" class="sanskrit-text-large"></p>
+                    <div class="divider mt-4 mb-4"></div>
+                    <p id="mainShlokHindi" class="hindi-meaning"></p>
+                </div>
+                
+                <div class="carousel-controls mt-6">
+                    <button id="prevShlok" class="secondary-btn">←</button>
+                    <button id="nextShlok" class="secondary-btn">→</button>
+                </div>
+            </div>
+            
+            <div class="all-shlokas-btn-container text-center mt-8">
+                 <p class="poetic-text">"आत्मा अजर और अमर है।"</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Personal Message Mode -->
+    <section id="personalMessageMode" class="screen hidden">
+        <div class="container pt-8 text-center">
+            <button class="back-btn mb-4" data-target="selectionScreen">← वापस</button>
+            <h2 class="section-title">❤️ मेरी माँ के नाम</h2>
+            
+            <div class="message-card mt-6" style="text-align: left; padding: 2rem; background: linear-gradient(145deg, #ffffff, #FFF9F2); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); font-family: var(--font-devanagari); font-size: 1.15rem; line-height: 2;">
+                <p class="mb-4">
+                    मैं बचपन से ही अपनी नानी के गाँव में पला-बढ़ा। दुनिया के लिए वो मेरी नानी थीं, लेकिन मेरे लिए वो हमेशा मेरी <strong>'माँ'</strong> रहीं। सच कहूँ तो, जितना लगाव मुझे अपनी मम्मी से था, उससे कहीं ज़्यादा गहरा नाता मेरा मेरी माँ (नानी) से था।
+                </p>
+                <p class="mb-4">
+                    वो मेरे लिए कुछ भी करने को हमेशा आगे रहती थीं। जब मम्मी पूजा-पाठ में व्यस्त होती थीं, तो मेरी माँ रसोई में जाकर सबके लिए खाना बनाती थीं, और सबसे पहले मुझे अपने हाथों से खिलाती थीं। उनका वो दुलार मैं कभी नहीं भूल सकता।
+                </p>
+                <p class="mb-4">
+                    उस आख़िरी दिन की याद मुझे आज भी अंदर तक तोड़ देती है। मेरा एग्जाम था और उस सुबह तक माँ बिल्कुल ठीक थीं। मैंने जाते समय उनके पैर छुए और कहा, <em>'माँ, मैं एग्जाम देकर आ रहा हूँ।'</em> उन्होंने मुझे प्यार से अपना आशीर्वाद दिया था।
+                </p>
+                <p class="mb-4">
+                    लेकिन जब मैं एग्जाम देकर लौटा, तो सब कुछ बदल चुका था। माँ कोमा में जा चुकी थीं। बाद में मुझे पता चला कि आख़िरी वक़्त में वो मेरा ही इंतज़ार कर रही थीं और पूछ रही थीं— <strong>"विक्की एग्जाम से नई अइले?"</strong>
+                </p>
+                <p class="mb-4">
+                    यह सोचकर आज भी मेरा दिल रो पड़ता है और मुझे बहुत अफ़सोस होता है कि मैं उनके आख़िरी पलों में उनसे मिल भी न सका, उनसे आख़िरी बार बात न कर सका। यह दुःख ताउम्र मेरे सीने में रहेगा।
+                </p>
+                <div class="divider mt-6 mb-6"></div>
+                <p class="text-center" style="font-size: 1.3rem; color: var(--clr-antique-gold); font-weight: 600;">
+                    भले ही आज वो मेरी आँखों के सामने नहीं हैं, लेकिन मैं जानता हूँ, मेरी माँ जहाँ भी होंगी, उनका आशीर्वाद मुझ पर और हम सब पर हमेशा बना रहेगा।
+                </p>
+                <p class="text-right mt-4" style="font-size: 1rem; color: var(--clr-text-main);">
+                    — आपका विक्की
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Memory Book Mode -->
+    <section id="bookMode" class="screen hidden">
+        <div class="container pt-8">
+            <button class="back-btn mb-4" data-target="selectionScreen">← वापस</button>
+            <h2 class="section-title text-center">📖 स्मृति-पुस्तक</h2>
+            
+            <div class="book-container mt-6">
+                <!-- Book pages can be added dynamically or statically -->
+                <div class="book-page">
+                    <h3>स्वर्गीय श्रीमती अन्नपूर्णा देवी</h3>
+                    <p class="mt-4">आपकी स्मृतियाँ हमारे साथ हमेशा जीवित रहेंगी।</p>
+                    <p class="mt-4">यह स्मृति-पुस्तक हमारे परिवार की अमूल्य धरोहर है।</p>
+                    <div class="divider mt-6 mb-6"></div>
+                    <p class="text-right">With love and remembrance<br><strong>Pratik Verma (Vicky)</strong></p>
+                </div>
+            </div>
+            
+            <!-- QR Code Section -->
+            <div class="qr-section text-center mt-12 mb-8">
+                <p>इस स्मृति को अपने परिवार तक पहुँचाएँ</p>
+                <div id="qrCodeContainer" class="mt-4">
+                    <!-- QR code will be generated here -->
+                </div>
+            </div>
+            
+            <div class="final-screen text-center mt-12 mb-12">
+                <p class="om-shanti">ॐ शान्तिः शान्तिः शान्तिः॥</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- External Library for QR Code -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "अन्नपूर्णा देवी — पावन स्मृति",
+  "short_name": "पावन स्मृति",
+  "description": "स्वर्गीय श्रीमती अन्नपूर्णा देवी की डिजिटल स्मृति-पुस्तक",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#FDFBF7",
+  "theme_color": "#FDFBF7",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

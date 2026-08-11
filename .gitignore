@@ -1,0 +1,7 @@
+temp/
+*.exe
+*.log
+.DS_Store
+
+*.zip
+ffmpeg-master-latest-win64-gpl/
