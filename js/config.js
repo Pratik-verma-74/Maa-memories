@@ -128,6 +128,36 @@ const photos = [
         title: "माँ की ममता",
         caption: "सदा के लिए अमर",
         date: ""
+    },
+    {
+        src: "assets/photos/memory-21.jpg",
+        title: "स्नेह और आशीर्वाद",
+        caption: "माथे पर तिलक और अनगिनत खुशियां",
+        date: ""
+    },
+    {
+        src: "assets/photos/memory-22.jpg",
+        title: "होली के रंग",
+        caption: "अपनों के साथ होली की खूबसूरत यादें",
+        date: ""
+    },
+    {
+        src: "assets/photos/memory-23.jpg",
+        title: "खुशियों के रंग",
+        caption: "परिवार के साथ होली का उल्लास",
+        date: ""
+    },
+    {
+        src: "assets/photos/memory-24.jpg",
+        title: "जन्मदिन का जश्न",
+        caption: "माँ का जन्मदिन और मीठी यादें",
+        date: ""
+    },
+    {
+        src: "assets/photos/memory-25.jpg",
+        title: "प्यारे पल",
+        caption: "बच्चों के साथ जन्मदिन की खास यादें",
+        date: ""
     }
 ];
 
