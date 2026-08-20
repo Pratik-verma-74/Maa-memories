@@ -13,16 +13,7 @@
 </head>
 <body>
 
-    <!-- Audio System -->
-    <div class="audio-panel">
-        <button id="musicToggle" class="floating-btn" title="प्ले / म्यूट">
-            <span id="musicIcon">🔇</span>
-        </button>
-        <div class="audio-options">
-            <button class="audio-btn active" data-src="assets/audio/mantra.m4a">ॐ गायत्री मंत्र</button>
-            <button class="audio-btn" data-src="assets/audio/maa_ki_dua_trimmed.m4a">माँ की दुआ</button>
-        </div>
-    </div>
+    <!-- Audio System removed from here, moved to navMenu -->
     <audio id="bgMusic" loop>
         <source src="assets/audio/mantra.m4a" type="audio/mp4">
     </audio>
@@ -39,6 +30,16 @@
             <li><a href="#" data-target="bookMode">📖 स्मृति-पुस्तक</a></li>
             <li><a href="#" data-target="personalMessageMode">❤️ मेरी माँ के नाम</a></li>
             <li><a href="#" data-target="bhavMode">✍️ अपने भाव लिखें</a></li>
+            <li style="padding: 15px 20px; border-top: 1px solid rgba(212,175,55,0.2); margin-top: 10px; background: rgba(0,0,0,0.02);">
+                <div style="font-size: 0.9rem; color: var(--clr-text-light); margin-bottom: 10px; text-align: center; font-family: var(--font-devanagari);">🎶 पृष्ठभूमि संगीत</div>
+                <button id="musicToggle" class="secondary-btn" style="width: 100%; margin-bottom: 10px; display:flex; justify-content:center; align-items:center; gap:8px;">
+                    <span id="musicIcon">🔇</span> प्ले / म्यूट
+                </button>
+                <div class="audio-options-nav" style="display:flex; flex-direction:column; gap:8px;">
+                    <button class="audio-btn active" data-src="assets/audio/mantra.m4a">ॐ गायत्री मंत्र</button>
+                    <button class="audio-btn" data-src="assets/audio/maa_ki_dua_trimmed.m4a">माँ की दुआ</button>
+                </div>
+            </li>
         </ul>
     </nav>
 
