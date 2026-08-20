@@ -80,8 +80,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const viewInBookBtn = document.getElementById('viewInBookBtn');
     if(viewInBookBtn) viewInBookBtn.addEventListener('click', () => switchScreen('bookMode'));
 
-    navToggle.addEventListener('click', () => {
+    navToggle.addEventListener('click', (e) => {
+        e.stopPropagation(); // prevent document click from firing
         mainNav.classList.toggle('open');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (mainNav.classList.contains('open') && !mainNav.contains(e.target)) {
+            mainNav.classList.remove('open');
+        }
     });
 
     // --- Audio System ---
