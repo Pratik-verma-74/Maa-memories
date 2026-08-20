@@ -519,9 +519,9 @@ document.addEventListener('DOMContentLoaded', () => {
         let pagesHtml = `
             <div class="page page-cover" data-density="hard">
                 <div class="book-page-content" style="justify-content:center; align-items:center;">
-                    <img src="assets/photos/Gemini_Generated_Image_jj7tyjjj7tyjjj7t.png" class="book-header-photo" style="width: 100px; height: 100px; margin-bottom: 20px;">
-                    <h3 class="neon-text mt-6" style="font-size: 1.8rem;">श्रीमती अन्नपूर्णा देवी</h3>
-                    <h3 class="neon-text mt-2">स्मृति पुस्तक</h3>
+                    <img src="assets/photos/Gemini_Generated_Image_jj7tyjjj7tyjjj7t.png" class="book-header-photo" style="width: 180px; height: 180px; margin-bottom: 30px; border-width: 4px; box-shadow: 0 0 20px #0ff;">
+                    <h3 class="neon-text mt-6" style="font-size: 2rem;">श्रीमती अन्नपूर्णा देवी</h3>
+                    <h3 class="neon-text mt-2" style="font-size: 1.5rem;">स्मृति पुस्तक</h3>
                     <p class="text-center mt-6" style="color:#0ff; font-style:italic;">आपकी स्मृतियाँ हमारे साथ हमेशा जीवित रहेंगी।</p>
                 </div>
             </div>
