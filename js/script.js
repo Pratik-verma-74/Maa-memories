@@ -511,9 +511,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Create cover page
         let pagesHtml = `
             <div class="page page-cover" data-density="hard">
-                <div class="book-page">
-                    <img src="assets/photos/Gemini_Generated_Image_jj7tyjjj7tyjjj7t.png" class="book-header-photo">
-                    <h3 class="neon-text mt-6">श्रीमती अन्नपूर्णा देवी</h3>
+                <div class="book-page-content" style="justify-content:center; align-items:center;">
+                    <img src="assets/photos/Gemini_Generated_Image_jj7tyjjj7tyjjj7t.png" class="book-header-photo" style="width: 100px; height: 100px; margin-bottom: 20px;">
+                    <h3 class="neon-text mt-6" style="font-size: 1.8rem;">श्रीमती अन्नपूर्णा देवी</h3>
                     <h3 class="neon-text mt-2">स्मृति पुस्तक</h3>
                     <p class="text-center mt-6" style="color:#0ff; font-style:italic;">आपकी स्मृतियाँ हमारे साथ हमेशा जीवित रहेंगी।</p>
                 </div>
@@ -523,7 +523,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (bhavsToRender.length === 0) {
             pagesHtml += `
                 <div class="page">
-                    <div class="book-page">
+                    <div class="watermark">ॐ शांति</div>
+                    <div class="book-page-content">
                         <img src="assets/photos/Gemini_Generated_Image_jj7tyjjj7tyjjj7t.png" class="book-header-photo">
                         <p class="text-center mt-8" style="color: rgba(0,255,255,0.7); font-style: italic;">अभी तक कोई भाव समर्पित नहीं किया गया है।</p>
                     </div>
@@ -537,13 +538,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 pagesHtml += `
                     <div class="page">
-                        <div class="book-page">
+                        <div class="watermark">ॐ शांति</div>
+                        <div class="book-page-content">
                             <img src="assets/photos/Gemini_Generated_Image_jj7tyjjj7tyjjj7t.png" class="book-header-photo">
                             <p style="white-space: pre-wrap; margin-top: 1rem; margin-bottom: 1rem; color: #fff; line-height: 1.6; font-size:1.1rem; flex-grow:1; overflow-y:auto;">${bhav.message}</p>
                             
-                            <div style="font-size: 0.9rem; color: #0ff; border-top: 1px solid rgba(0,255,255,0.3); padding-top:10px;">
-                                <div style="display:flex; justify-content:space-between;">
-                                    <strong>— ${bhav.name}</strong>
+                            <div style="font-size: 0.85rem; color: #0ff; border-top: 1px solid rgba(0,255,255,0.3); padding-top:10px;">
+                                <div style="display:flex; justify-content:space-between; align-items:center;">
+                                    <strong style="font-size:1rem;">— ${bhav.name}</strong>
                                     <span>${dateStr}</span>
                                 </div>
                                 ${locStr ? `<div style="text-align:left; margin-top:5px; color:rgba(0,255,255,0.7);">📍 ${locStr}</div>` : ''}
@@ -558,8 +560,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Back cover
         pagesHtml += `
             <div class="page page-cover" data-density="hard">
-                <div class="book-page" style="justify-content:center; align-items:center;">
-                    <h3 class="neon-text">ॐ शान्तिः शान्तिः शान्तिः॥</h3>
+                <div class="book-page-content" style="justify-content:center; align-items:center;">
+                    <h3 class="neon-text" style="font-size: 1.5rem;">ॐ शान्तिः शान्तिः शान्तिः॥</h3>
                 </div>
             </div>
         `;

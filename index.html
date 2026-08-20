@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>अन्नपूर्णा देवी — पावन स्मृति</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=2">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <!-- StPageFlip for realistic book flipping -->
     <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
@@ -51,7 +51,7 @@
                 <h1 class="om-shanti">ॐ शांति ॐ</h1>
                 
                 <div class="hero-portrait mt-8 mb-4">
-                    <img src="assets/photos/Gemini_Generated_Image_jj7tyjjj7tyjjj7t.png" alt="स्वर्गीय श्रीमती अन्नपूर्णा देवी">
+                    <img src="assets/photos/Gemini_Generated_Image_jj7tyjjj7tyjjj7t.png" alt="स्वर्गीय श्रीमती अन्नपूर्णा देवी" class="main-portrait-img">
                     <div id="diyaContainer" class="diya-container hidden">
                         <!-- Real CSS Diya or Image will go here -->
                         <div class="css-diya">
@@ -278,8 +278,8 @@
                 <input type="text" id="searchBookInput" placeholder="🔍 नाम, शहर या संदेश खोजें..." style="width: 80%; max-width: 400px; padding: 10px 15px; border-radius: 20px; border: 2px solid #0ff; background: rgba(0,0,0,0.7); color: #fff; font-family: var(--font-devanagari); font-size: 1.1rem; outline: none; box-shadow: 0 0 10px rgba(0,255,255,0.5);">
             </div>
 
-            <div class="book-wrapper mt-6 flex-center" style="display: flex; justify-content: center; width: 100%; perspective: 1500px;">
-                <div id="flipBookContainer">
+            <div class="book-wrapper mt-6" style="margin: 0 auto; width: 100%; max-width: 400px; height: 550px; position: relative;">
+                <div id="flipBookContainer" style="width: 100%; height: 100%;">
                     <!-- StPageFlip will render here -->
                 </div>
             </div>
