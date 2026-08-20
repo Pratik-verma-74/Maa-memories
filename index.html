@@ -36,41 +36,49 @@
             <li><a href="#" data-target="shlokMode">🕉️ संस्कृत श्लोक</a></li>
             <li><a href="#" data-target="bookMode">📖 स्मृति-पुस्तक</a></li>
             <li><a href="#" data-target="personalMessageMode">❤️ मेरी माँ के नाम</a></li>
+            <li><a href="#" data-target="bhavMode">✍️ अपने भाव लिखें</a></li>
         </ul>
     </nav>
 
     <!-- 1. Landing Screen -->
     <section id="homeScreen" class="screen active fade-in">
         <div class="content-center">
-            <h1 class="om-shanti">ॐ शांति ॐ</h1>
-            
-            <div class="hero-portrait mt-8 mb-4">
-                <img src="assets/photos/Gemini_Generated_Image_jj7tyjjj7tyjjj7t.png" alt="स्वर्गीय श्रीमती अन्नपूर्णा देवी">
-                <div id="diyaContainer" class="diya-container hidden">
-                    <!-- Real CSS Diya or Image will go here -->
-                    <div class="css-diya">
-                        <div class="flame"></div>
-                        <div class="base"></div>
+            <div class="home-card">
+                <div class="home-card-bg"></div>
+                
+                <h1 class="om-shanti">ॐ शांति ॐ</h1>
+                
+                <div class="hero-portrait mt-8 mb-4">
+                    <img src="assets/photos/Gemini_Generated_Image_jj7tyjjj7tyjjj7t.png" alt="स्वर्गीय श्रीमती अन्नपूर्णा देवी">
+                    <div id="diyaContainer" class="diya-container hidden">
+                        <!-- Real CSS Diya or Image will go here -->
+                        <div class="css-diya">
+                            <div class="flame"></div>
+                            <div class="base"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="tribute-actions mb-6">
-                <button id="btnPushpanjali" class="tribute-btn real-icon-btn" title="पुष्पांजलि अर्पित करें">
-                    <img src="assets/images/real_flower.png" alt="Flower">
-                </button>
-                <button id="btnDiya" class="tribute-btn real-icon-btn" title="दीप प्रज्वलित करें">
-                    <img src="assets/images/real_diya.png" alt="Diya">
-                </button>
-            </div>
+                <div class="tribute-actions mb-6">
+                    <button id="btnPushpanjali" class="tribute-btn real-icon-btn" title="पुष्पांजलि अर्पित करें">
+                        <img src="assets/images/real_flower.png" alt="Flower">
+                    </button>
+                    <button id="btnDiya" class="tribute-btn real-icon-btn" title="दीप प्रज्वलित करें">
+                        <img src="assets/images/real_diya.png" alt="Diya">
+                    </button>
+                </div>
 
-            <h2 class="sub-title">पावन स्मृति</h2>
-            <h1 class="main-title mt-2">स्वर्गीय श्रीमती अन्नपूर्णा देवी</h1>
-            <p class="quote mt-4">मेरी नानी...<br>मेरी माँ।</p>
-            <p class="date mt-4">07 अगस्त 2026</p>
-            <div class="divider mt-6"></div>
-            <p class="poetic-text mt-4">“कुछ रिश्ते नाम से नहीं,<br>दिल में मिले स्थान से पहचाने जाते हैं।”</p>
-            <button id="enterBtn" class="primary-btn mt-8">📖 स्मृति पुस्तक खोलें</button>
+                <h2 class="sub-title">पावन स्मृति</h2>
+                <h1 class="main-title mt-2">स्वर्गीय श्रीमती अन्नपूर्णा देवी</h1>
+                <p class="quote mt-4">मेरी नानी...<br>मेरी माँ।</p>
+                <p class="date mt-4">07 अगस्त 2026</p>
+                <div class="divider mt-6"></div>
+                <p class="poetic-text mt-4">“कुछ रिश्ते नाम से नहीं,<br>दिल में मिले स्थान से पहचाने जाते हैं।”</p>
+                <div class="mt-8" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 5;">
+                    <button id="enterBtn" class="primary-btn" style="padding: 14px 24px; font-size: 1.1rem;">📖 स्मृति पुस्तक</button>
+                    <button id="homeBhavBtn" class="primary-btn" style="padding: 14px 24px; font-size: 1.1rem; background: linear-gradient(145deg, #aa8222, #8f6f28);">✍️ अपने भाव लिखें</button>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -91,6 +99,12 @@
                     <div class="mode-icon-gold">🎬</div>
                     <h3>वीडियो स्मृति</h3>
                     <p>चलती-फिरती यादों का संग्रह</p>
+                </div>
+
+                <div class="mode-card" id="openBhavBtn">
+                    <div class="mode-icon-gold">✍️</div>
+                    <h3>अपने भाव</h3>
+                    <p>माँ के लिए अपनी यादें और श्रद्धा सुमन अर्पित करें</p>
                 </div>
             </div>
             
@@ -217,6 +231,34 @@
         </div>
     </section>
 
+    <!-- 6.5 Bhav Mode -->
+    <section id="bhavMode" class="screen hidden">
+        <div class="container pt-8 pb-8">
+            <button class="back-btn mb-4" data-target="selectionScreen">← वापस</button>
+            <h2 class="section-title text-center">✍️ अपने भाव व्यक्त करें</h2>
+            <p class="text-center mt-2" style="color: var(--clr-text-light);">माँ की याद में अपने विचार, कहानियाँ और श्रद्धा सुमन अर्पित करें</p>
+            
+            <div class="message-card mt-6" style="padding: 2rem; background: linear-gradient(145deg, #ffffff, #FFF9F2); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+                <form id="bhavForm">
+                    <div style="margin-bottom: 1rem;">
+                        <input type="text" id="bhavName" placeholder="आपका नाम" required style="width: 100%; padding: 12px; border: 1px solid var(--clr-soft-beige); border-radius: 8px; font-family: var(--font-devanagari); font-size: 1.1rem; background: #fff; outline: none; color: var(--clr-text-main);">
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <textarea id="bhavMessage" rows="5" placeholder="माँ के लिए अपने भाव यहाँ लिखें..." required style="width: 100%; padding: 12px; border: 1px solid var(--clr-soft-beige); border-radius: 8px; font-family: var(--font-devanagari); font-size: 1.1rem; background: #fff; resize: vertical; outline: none; color: var(--clr-text-main);"></textarea>
+                    </div>
+                    <button type="submit" class="primary-btn" style="width: 100%; border-radius: 8px;">भाव समर्पित करें</button>
+                </form>
+            </div>
+            
+            <div class="divider mt-8 mb-8"></div>
+            
+            <h3 class="text-center mb-4" style="color: var(--clr-antique-gold);">समर्पित भाव</h3>
+            <div id="bhavList" class="mt-4" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <!-- User submitted bhavs will be displayed here dynamically -->
+            </div>
+        </div>
+    </section>
+
     <!-- 7. Memory Book Mode -->
     <section id="bookMode" class="screen hidden">
         <div class="container pt-8">
@@ -250,6 +292,11 @@
 
     <!-- External Library for QR Code -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
+    <!-- Firebase SDK (Compat Version for simpler integration) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    
     <script src="js/config.js"></script>
     <script src="js/script.js"></script>
 </body>

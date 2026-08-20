@@ -73,6 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if(enterBtn) enterBtn.addEventListener('click', () => switchScreen('selectionScreen'));
     if(openPhotoBtn) openPhotoBtn.addEventListener('click', () => switchScreen('photoMode'));
     if(openVideoBtn) openVideoBtn.addEventListener('click', () => switchScreen('videoMode'));
+    const openBhavBtn = document.getElementById('openBhavBtn');
+    if(openBhavBtn) openBhavBtn.addEventListener('click', () => switchScreen('bhavMode'));
+    const homeBhavBtn = document.getElementById('homeBhavBtn');
+    if(homeBhavBtn) homeBhavBtn.addEventListener('click', () => switchScreen('bhavMode'));
 
     navToggle.addEventListener('click', () => {
         mainNav.classList.toggle('open');
@@ -431,6 +435,134 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
+    // --- Firebase and Bhav Mode Logic ---
+    const bhavForm = document.getElementById('bhavForm');
+    const bhavList = document.getElementById('bhavList');
+    const STORAGE_KEY = 'maa_smriti_bhavs';
+
+    // REPLACE THIS WITH YOUR ACTUAL FIREBASE CONFIG
+    const firebaseConfig = {
+        apiKey: "AIzaSyARPXG2TzKDASm7nidx80F1gXCTqy1IFlY",
+        authDomain: "maa-memory.firebaseapp.com",
+        projectId: "maa-memory",
+        storageBucket: "maa-memory.firebasestorage.app",
+        messagingSenderId: "984263730957",
+        appId: "1:984263730957:web:08f5c50a34270f706a7244",
+        measurementId: "G-QX2L45FLXV"
+    };
+
+    let db = null;
+    let isFirebaseConfigured = false;
+
+    // Check if Firebase is actually configured (user replaced placeholders)
+    if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "YOUR_API_KEY") {
+        try {
+            firebase.initializeApp(firebaseConfig);
+            db = firebase.firestore();
+            isFirebaseConfigured = true;
+        } catch (e) {
+            console.error("Firebase initialization error:", e);
+        }
+    }
+
+    async function loadBhavs() {
+        if (!bhavList) return;
+        bhavList.innerHTML = '<p class="text-center" style="color: var(--clr-text-light);">लोड हो रहा है...</p>';
+        
+        let savedBhavs = [];
+
+        if (isFirebaseConfigured) {
+            try {
+                const snapshot = await db.collection("bhavs").orderBy("timestamp", "asc").get();
+                snapshot.forEach((doc) => {
+                    savedBhavs.push(doc.data());
+                });
+                // We reverse the array to show newest first, as asc ordering + reverse is often easier 
+                // if there's no index set up. But asc on string timestamp should work.
+                savedBhavs.reverse();
+            } catch (error) {
+                console.error("Error loading from Firebase:", error);
+                savedBhavs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]').reverse();
+            }
+        } else {
+            savedBhavs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]').reverse();
+        }
+
+        bhavList.innerHTML = '';
+        
+        if (savedBhavs.length === 0) {
+            bhavList.innerHTML = '<p class="text-center" style="color: var(--clr-text-light); font-style: italic;">अभी तक कोई भाव समर्पित नहीं किया गया है।</p>';
+            return;
+        }
+
+        savedBhavs.forEach(bhav => {
+            const dateObj = new Date(bhav.timestamp);
+            const dateStr = dateObj.toLocaleDateString('hi-IN', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute:'2-digit' });
+
+            const card = document.createElement('div');
+            card.style.cssText = 'padding: 1.5rem; background: #fff; border-left: 4px solid var(--clr-antique-gold); border-radius: 8px; box-shadow: var(--shadow-soft);';
+            
+            // Render the message carefully to avoid XSS in a basic way and preserve formatting
+            const messageEl = document.createElement('p');
+            messageEl.style.cssText = 'font-family: var(--font-devanagari); font-size: 1.1rem; line-height: 1.6; white-space: pre-wrap; margin-bottom: 1rem; color: var(--clr-text-main);';
+            messageEl.textContent = bhav.message;
+
+            const footerDiv = document.createElement('div');
+            footerDiv.className = 'flex-between';
+            footerDiv.style.cssText = 'font-size: 0.9rem; color: var(--clr-text-light);';
+            footerDiv.innerHTML = `<strong>— ${bhav.name}</strong><span>${dateStr}</span>`;
+
+            card.appendChild(messageEl);
+            card.appendChild(footerDiv);
+            bhavList.appendChild(card);
+        });
+    }
+
+    if (bhavForm) {
+        bhavForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = bhavForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerText;
+            
+            const nameInput = document.getElementById('bhavName').value.trim();
+            const messageInput = document.getElementById('bhavMessage').value.trim();
+            
+            if (nameInput && messageInput) {
+                submitBtn.innerText = "समर्पित हो रहा है...";
+                submitBtn.disabled = true;
+
+                const newBhav = {
+                    name: nameInput,
+                    message: messageInput,
+                    timestamp: new Date().toISOString()
+                };
+                
+                if (isFirebaseConfigured) {
+                    try {
+                        await db.collection("bhavs").add(newBhav);
+                    } catch (error) {
+                        console.error("Error saving to Firebase:", error);
+                        // Save locally as fallback
+                        const savedBhavs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+                        savedBhavs.push(newBhav);
+                        localStorage.setItem(STORAGE_KEY, JSON.stringify(savedBhavs));
+                    }
+                } else {
+                    const savedBhavs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+                    savedBhavs.push(newBhav);
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(savedBhavs));
+                }
+                
+                bhavForm.reset();
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+                loadBhavs();
+            }
+        });
+        
+        loadBhavs();
+    }
 
     // --- QR Code Generation ---
     const qrContainer = document.getElementById('qrCodeContainer');
