@@ -158,7 +158,21 @@ const photos = [
         title: "प्यारे पल",
         caption: "बच्चों के साथ जन्मदिन की खास यादें",
         date: ""
-    }
+    },
+    { src: "assets/images/WhatsApp Image 2026-08-11 at 8.39.05 AM.jpeg", title: "सुंदर स्मृतियाँ", caption: "पावन यादें", date: "" },
+    { src: "assets/images/WhatsApp Image 2026-08-11 at 8.39.16 AM (1).jpeg", title: "सुंदर स्मृतियाँ", caption: "पावन यादें", date: "" },
+    { src: "assets/images/WhatsApp Image 2026-08-11 at 8.39.16 AM.jpeg", title: "सुंदर स्मृतियाँ", caption: "पावन यादें", date: "" },
+    { src: "assets/images/WhatsApp Image 2026-08-11 at 8.39.17 AM.jpeg", title: "सुंदर स्मृतियाँ", caption: "पावन यादें", date: "" },
+    { src: "assets/images/WhatsApp Image 2026-08-20 at 6.03.26 PM.jpeg", title: "सुंदर स्मृतियाँ", caption: "पावन यादें", date: "" },
+    { src: "assets/images/WhatsApp Image 2026-08-20 at 6.03.54 PM (1).jpeg", title: "सुंदर स्मृतियाँ", caption: "पावन यादें", date: "" },
+    { src: "assets/images/WhatsApp Image 2026-08-20 at 6.03.54 PM.jpeg", title: "सुंदर स्मृतियाँ", caption: "पावन यादें", date: "" },
+    { src: "assets/images/WhatsApp Image 2026-08-20 at 6.03.55 PM (1).jpeg", title: "सुंदर स्मृतियाँ", caption: "पावन यादें", date: "" },
+    { src: "assets/images/WhatsApp Image 2026-08-20 at 6.03.55 PM.jpeg", title: "सुंदर स्मृतियाँ", caption: "पावन यादें", date: "" },
+    { src: "assets/images/WhatsApp Image 2026-08-20 at 6.03.57 PM (1).jpeg", title: "सुंदर स्मृतियाँ", caption: "पावन यादें", date: "" },
+    { src: "assets/images/WhatsApp Image 2026-08-20 at 6.03.58 PM (1).jpeg", title: "सुंदर स्मृतियाँ", caption: "पावन यादें", date: "" },
+    { src: "assets/images/WhatsApp Image 2026-08-20 at 6.03.58 PM.jpeg", title: "सुंदर स्मृतियाँ", caption: "पावन यादें", date: "" },
+    { src: "assets/images/WhatsApp Image 2026-08-20 at 6.03.59 PM (1).jpeg", title: "सुंदर स्मृतियाँ", caption: "पावन यादें", date: "" },
+    { src: "assets/images/WhatsApp Image 2026-08-20 at 6.03.59 PM.jpeg", title: "सुंदर स्मृतियाँ", caption: "पावन यादें", date: "" }
 ];
 
 // You can add your videos here later. Just place the video file in the assets/videos folder and update this list.
@@ -167,6 +181,12 @@ const videos = [
         src: "assets/videos/maa_ki_dua_slideshow_final.mp4",
         thumbnail: "assets/photos/memory-1.jpg", // Using a photo as thumbnail
         title: "माँ की दुआ - स्मृतियाँ",
+        date: ""
+    },
+    {
+        src: "assets/images/WhatsApp Video 2026-08-11 at 8.39.15 AM.mp4",
+        thumbnail: "assets/images/WhatsApp Image 2026-08-11 at 8.39.05 AM.jpeg",
+        title: "अविस्मरणीय पल",
         date: ""
     }
 ];

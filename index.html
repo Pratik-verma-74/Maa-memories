@@ -6,6 +6,8 @@
     <title>अन्नपूर्णा देवी — पावन स्मृति</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- StPageFlip for realistic book flipping -->
+    <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#FDFBF7">
 </head>
@@ -243,6 +245,9 @@
                     <div style="margin-bottom: 1rem;">
                         <input type="text" id="bhavName" placeholder="आपका नाम" required style="width: 100%; padding: 12px; border: 1px solid var(--clr-soft-beige); border-radius: 8px; font-family: var(--font-devanagari); font-size: 1.1rem; background: #fff; outline: none; color: var(--clr-text-main);">
                     </div>
+                    <div style="margin-bottom: 1rem;">
+                        <input type="text" id="bhavLocation" placeholder="आपका शहर / गाँव (ताकि भविष्य में पता चले)" required style="width: 100%; padding: 12px; border: 1px solid var(--clr-soft-beige); border-radius: 8px; font-family: var(--font-devanagari); font-size: 1.1rem; background: #fff; outline: none; color: var(--clr-text-main);">
+                    </div>
                     <div style="margin-bottom: 1.5rem;">
                         <textarea id="bhavMessage" rows="5" placeholder="माँ के लिए अपने भाव यहाँ लिखें..." required style="width: 100%; padding: 12px; border: 1px solid var(--clr-soft-beige); border-radius: 8px; font-family: var(--font-devanagari); font-size: 1.1rem; background: #fff; resize: vertical; outline: none; color: var(--clr-text-main);"></textarea>
                     </div>
@@ -253,8 +258,12 @@
             <div class="divider mt-8 mb-8"></div>
             
             <h3 class="text-center mb-4" style="color: var(--clr-antique-gold);">समर्पित भाव</h3>
-            <div id="bhavList" class="mt-4" style="display: flex; flex-direction: column; gap: 1.5rem;">
-                <!-- User submitted bhavs will be displayed here dynamically -->
+            <div id="bhavList" class="mt-4 hidden" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <!-- User submitted bhavs will be displayed here dynamically (Hidden here, moved to Book Mode) -->
+            </div>
+            
+            <div class="text-center mt-6">
+                <button id="viewInBookBtn" class="primary-btn">📖 स्मृति-पुस्तक में सभी भाव पढ़ें</button>
             </div>
         </div>
     </section>
@@ -263,16 +272,15 @@
     <section id="bookMode" class="screen hidden">
         <div class="container pt-8">
             <button class="back-btn mb-4" data-target="selectionScreen">← वापस</button>
-            <h2 class="section-title text-center">📖 स्मृति-पुस्तक</h2>
+            <h2 class="section-title text-center" style="color: #0ff; text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;">📖 स्मृति-पुस्तक</h2>
             
-            <div class="book-container mt-6">
-                <!-- Book pages can be added dynamically or statically -->
-                <div class="book-page">
-                    <h3>स्वर्गीय श्रीमती अन्नपूर्णा देवी</h3>
-                    <p class="mt-4">आपकी स्मृतियाँ हमारे साथ हमेशा जीवित रहेंगी।</p>
-                    <p class="mt-4">यह स्मृति-पुस्तक हमारे परिवार की अमूल्य धरोहर है।</p>
-                    <div class="divider mt-6 mb-6"></div>
-                    <p class="text-right">With love and remembrance<br><strong>Pratik Verma (Vicky)</strong></p>
+            <div class="search-container mt-4 mb-4 text-center">
+                <input type="text" id="searchBookInput" placeholder="🔍 नाम, शहर या संदेश खोजें..." style="width: 80%; max-width: 400px; padding: 10px 15px; border-radius: 20px; border: 2px solid #0ff; background: rgba(0,0,0,0.7); color: #fff; font-family: var(--font-devanagari); font-size: 1.1rem; outline: none; box-shadow: 0 0 10px rgba(0,255,255,0.5);">
+            </div>
+
+            <div class="book-wrapper mt-6 flex-center" style="display: flex; justify-content: center; width: 100%; perspective: 1500px;">
+                <div id="flipBookContainer">
+                    <!-- StPageFlip will render here -->
                 </div>
             </div>
             

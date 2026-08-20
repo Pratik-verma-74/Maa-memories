@@ -77,6 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if(openBhavBtn) openBhavBtn.addEventListener('click', () => switchScreen('bhavMode'));
     const homeBhavBtn = document.getElementById('homeBhavBtn');
     if(homeBhavBtn) homeBhavBtn.addEventListener('click', () => switchScreen('bhavMode'));
+    const viewInBookBtn = document.getElementById('viewInBookBtn');
+    if(viewInBookBtn) viewInBookBtn.addEventListener('click', () => switchScreen('bookMode'));
 
     navToggle.addEventListener('click', () => {
         mainNav.classList.toggle('open');
@@ -466,9 +468,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    let allBhavsData = []; // Store all bhavs for search
+    let bookFlipInstance = null;
+
     async function loadBhavs() {
-        if (!bhavList) return;
-        bhavList.innerHTML = '<p class="text-center" style="color: var(--clr-text-light);">लोड हो रहा है...</p>';
+        const flipBookContainer = document.getElementById('flipBookContainer');
+        if (!flipBookContainer) return;
         
         let savedBhavs = [];
 
@@ -478,8 +483,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 snapshot.forEach((doc) => {
                     savedBhavs.push(doc.data());
                 });
-                // We reverse the array to show newest first, as asc ordering + reverse is often easier 
-                // if there's no index set up. But asc on string timestamp should work.
                 savedBhavs.reverse();
             } catch (error) {
                 console.error("Error loading from Firebase:", error);
@@ -489,33 +492,115 @@ document.addEventListener('DOMContentLoaded', () => {
             savedBhavs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]').reverse();
         }
 
-        bhavList.innerHTML = '';
+        allBhavsData = savedBhavs;
+        renderBook(allBhavsData);
+    }
+
+    function renderBook(bhavsToRender) {
+        const flipBookContainer = document.getElementById('flipBookContainer');
+        if (!flipBookContainer) return;
         
-        if (savedBhavs.length === 0) {
-            bhavList.innerHTML = '<p class="text-center" style="color: var(--clr-text-light); font-style: italic;">अभी तक कोई भाव समर्पित नहीं किया गया है।</p>';
-            return;
+        // Destroy previous instance if exists
+        if (bookFlipInstance) {
+            bookFlipInstance.destroy();
+            bookFlipInstance = null;
         }
+        
+        flipBookContainer.innerHTML = '';
+        
+        // Create cover page
+        let pagesHtml = `
+            <div class="page page-cover" data-density="hard">
+                <div class="book-page">
+                    <img src="assets/photos/Gemini_Generated_Image_jj7tyjjj7tyjjj7t.png" class="book-header-photo">
+                    <h3 class="neon-text mt-6">श्रीमती अन्नपूर्णा देवी</h3>
+                    <h3 class="neon-text mt-2">स्मृति पुस्तक</h3>
+                    <p class="text-center mt-6" style="color:#0ff; font-style:italic;">आपकी स्मृतियाँ हमारे साथ हमेशा जीवित रहेंगी।</p>
+                </div>
+            </div>
+        `;
+        
+        if (bhavsToRender.length === 0) {
+            pagesHtml += `
+                <div class="page">
+                    <div class="book-page">
+                        <img src="assets/photos/Gemini_Generated_Image_jj7tyjjj7tyjjj7t.png" class="book-header-photo">
+                        <p class="text-center mt-8" style="color: rgba(0,255,255,0.7); font-style: italic;">अभी तक कोई भाव समर्पित नहीं किया गया है।</p>
+                    </div>
+                </div>
+            `;
+        } else {
+            bhavsToRender.forEach((bhav, index) => {
+                const dateObj = new Date(bhav.timestamp);
+                const dateStr = dateObj.toLocaleDateString('hi-IN', { year: 'numeric', month: 'long', day: 'numeric' });
+                const locStr = bhav.location ? bhav.location : '';
 
-        savedBhavs.forEach(bhav => {
-            const dateObj = new Date(bhav.timestamp);
-            const dateStr = dateObj.toLocaleDateString('hi-IN', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute:'2-digit' });
-
-            const card = document.createElement('div');
-            card.style.cssText = 'padding: 1.5rem; background: #fff; border-left: 4px solid var(--clr-antique-gold); border-radius: 8px; box-shadow: var(--shadow-soft);';
+                pagesHtml += `
+                    <div class="page">
+                        <div class="book-page">
+                            <img src="assets/photos/Gemini_Generated_Image_jj7tyjjj7tyjjj7t.png" class="book-header-photo">
+                            <p style="white-space: pre-wrap; margin-top: 1rem; margin-bottom: 1rem; color: #fff; line-height: 1.6; font-size:1.1rem; flex-grow:1; overflow-y:auto;">${bhav.message}</p>
+                            
+                            <div style="font-size: 0.9rem; color: #0ff; border-top: 1px solid rgba(0,255,255,0.3); padding-top:10px;">
+                                <div style="display:flex; justify-content:space-between;">
+                                    <strong>— ${bhav.name}</strong>
+                                    <span>${dateStr}</span>
+                                </div>
+                                ${locStr ? `<div style="text-align:left; margin-top:5px; color:rgba(0,255,255,0.7);">📍 ${locStr}</div>` : ''}
+                            </div>
+                            <div class="page-number">Page ${index + 1}</div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+        
+        // Back cover
+        pagesHtml += `
+            <div class="page page-cover" data-density="hard">
+                <div class="book-page" style="justify-content:center; align-items:center;">
+                    <h3 class="neon-text">ॐ शान्तिः शान्तिः शान्तिः॥</h3>
+                </div>
+            </div>
+        `;
+        
+        flipBookContainer.innerHTML = pagesHtml;
+        
+        // Initialize StPageFlip
+        if (typeof St !== 'undefined' && St.PageFlip) {
+            bookFlipInstance = new St.PageFlip(flipBookContainer, {
+                width: 350,
+                height: 500,
+                size: "stretch",
+                minWidth: 300,
+                maxWidth: 450,
+                minHeight: 400,
+                maxHeight: 650,
+                maxShadowOpacity: 0.5,
+                showCover: true,
+                mobileScrollSupport: false,
+                usePortrait: true
+            });
+            bookFlipInstance.loadFromHTML(flipBookContainer.querySelectorAll('.page'));
+        }
+    }
+    
+    // Search Functionality
+    const searchBookInput = document.getElementById('searchBookInput');
+    if (searchBookInput) {
+        searchBookInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            if (!term) {
+                renderBook(allBhavsData);
+                return;
+            }
             
-            // Render the message carefully to avoid XSS in a basic way and preserve formatting
-            const messageEl = document.createElement('p');
-            messageEl.style.cssText = 'font-family: var(--font-devanagari); font-size: 1.1rem; line-height: 1.6; white-space: pre-wrap; margin-bottom: 1rem; color: var(--clr-text-main);';
-            messageEl.textContent = bhav.message;
-
-            const footerDiv = document.createElement('div');
-            footerDiv.className = 'flex-between';
-            footerDiv.style.cssText = 'font-size: 0.9rem; color: var(--clr-text-light);';
-            footerDiv.innerHTML = `<strong>— ${bhav.name}</strong><span>${dateStr}</span>`;
-
-            card.appendChild(messageEl);
-            card.appendChild(footerDiv);
-            bhavList.appendChild(card);
+            const filtered = allBhavsData.filter(bhav => {
+                const text = (bhav.name + " " + (bhav.location || "") + " " + bhav.message).toLowerCase();
+                return text.includes(term);
+            });
+            
+            renderBook(filtered);
         });
     }
 
@@ -526,6 +611,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const originalBtnText = submitBtn.innerText;
             
             const nameInput = document.getElementById('bhavName').value.trim();
+            const locInput = document.getElementById('bhavLocation').value.trim();
             const messageInput = document.getElementById('bhavMessage').value.trim();
             
             if (nameInput && messageInput) {
@@ -534,6 +620,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const newBhav = {
                     name: nameInput,
+                    location: locInput,
                     message: messageInput,
                     timestamp: new Date().toISOString()
                 };
